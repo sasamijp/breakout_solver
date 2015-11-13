@@ -167,6 +167,16 @@ class GA {
   }
   
   void selection(){
+    int parent = int(random(eliteLength, eliteLength+3));
+    
+    int c = eliteLength;
+    for(int i=eliteLength;i<((population-eliteLength)/2)+eliteLength;i++){
+      genes[c] = genes[parent];
+      genes[c+1] = genes[parent+1];
+      
+      c += 2;
+    }
+    
     
   }
   

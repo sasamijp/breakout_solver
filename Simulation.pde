@@ -20,36 +20,36 @@ class Simulation {
   
   void step(){
     Line norbit;
-      stroke(255,0,0);
-      orbit.draw();
+    stroke(255,0,0);
+    orbit.draw();
       
-      stroke(0);
-      stage.draw();
+    stroke(0);
+    stage.draw();
+    
+    norbit = stage.getCollidedOrbit(orbit, ball);
       
+    if( stage.colliedintersection.y > stage.lines[124].v ){
+      float movedrange = orbit.getX(stage.lines[124].v);
+      //float point = random(1,59);
+      float point = getPointFromDNA(eventc);
+      stage.lines[124].r = new Range(movedrange+point-60, movedrange+point+0);
       norbit = stage.getCollidedOrbit(orbit, ball);
+      eventc++;
+    }
       
-      if( stage.colliedintersection.y > stage.lines[124].v ){
-        float movedrange = orbit.getX(stage.lines[124].v);
-        //float point = random(1,59);
-        float point = getPointFromDNA(eventc);
-        stage.lines[124].r = new Range(movedrange+point-60, movedrange+point+0);
-        norbit = stage.getCollidedOrbit(orbit, ball);
-        eventc++;
-      }
+    l += ball.dist(new PVector(norbit.a, norbit.b));
       
-      l += ball.dist(new PVector(norbit.a, norbit.b));
+    orbit = norbit;
       
-      orbit = norbit;
+    ball = new PVector(norbit.a, norbit.b);
       
-      ball = new PVector(norbit.a, norbit.b);
-      
-      boolean finished = true;
-      for(int i=4; i<=123; i++)
-        if(!(stage.lines[i].deleted))
-          finished = false;
+    boolean finished = true;
+    for(int i=4; i<=123; i++)
+      if(!(stage.lines[i].deleted))
+        finished = false;
           
      
-      if((finished) || (eventc >= 30)) onFinished();
+    if((finished) || (eventc >= 30)) onFinished();
   }
   
   void onFinished(){
@@ -74,4 +74,3 @@ class Simulation {
   }
 
 }
-
