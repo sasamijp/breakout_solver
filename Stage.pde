@@ -78,6 +78,7 @@ class Stage{
     if((4 <= colliedline) && (colliedline <= 123))
       deleteBlock(colliedline);
     
+    
     stroke(0,255,0);
     ellipse(intersection.x, intersection.y, 10,10);
     
@@ -138,5 +139,7 @@ class Stage{
       if(lines[i].deleted == false)
         lines[i].draw();
   }
+  
+  
 
 }

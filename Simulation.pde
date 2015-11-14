@@ -9,6 +9,7 @@ class Simulation {
   String dna;
   int eventc = 0;
   int limit = 15;
+  ArrayList<PVector> orbits = new ArrayList<PVector>();
   
   Simulation(Stage _s, String _dna){
     stage = _s;
@@ -22,9 +23,10 @@ class Simulation {
     Line norbit;
     stroke(255,0,0);
     orbit.draw();
-      
     stroke(0);
     stage.draw();
+    
+    if(!f) orbits.add(ball);
     
     norbit = stage.getCollidedOrbit(orbit, ball);
       
@@ -42,7 +44,9 @@ class Simulation {
     orbit = norbit;
       
     ball = new PVector(norbit.a, norbit.b);
-      
+    
+    
+
     boolean finished = true;
     for(int i=4; i<=123; i++)
       if(!(stage.lines[i].deleted))
@@ -57,7 +61,7 @@ class Simulation {
     //println("eventc : "+eventc);
     //println("===============================================");
     f = true;
-    exit();
+    //exit();
   }
   
   float getPointFromDNA(int e){
