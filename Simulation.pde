@@ -6,6 +6,7 @@ class Simulation {
   PVector ball;
   float l;
   boolean f = false;
+  boolean randomplay = false;
   String dna;
   int eventc = 0;
   int limit = 15;
@@ -17,6 +18,14 @@ class Simulation {
     ball = new PVector(stage.set.x+250, stage.set.y+150);
     orbit = new Line(500, 5, ball.x, ball.y, new Range(ball.x, stage.set.x+500));
     l = 0;
+  }
+  
+  Simulation(Stage _s){ // random simulation
+    stage = _s;
+    ball = new PVector(stage.set.x+250, stage.set.y+150);
+    orbit = new Line(500, 5, ball.x, ball.y, new Range(ball.x, stage.set.x+500));
+    l = 0;
+    randomplay = true;
   }
   
   void step(){
@@ -32,8 +41,11 @@ class Simulation {
       
     if( stage.colliedintersection.y > stage.lines[124].v ){
       float movedrange = orbit.getX(stage.lines[124].v);
-      //float point = random(1,59);
-      float point = getPointFromDNA(eventc);
+      float point;
+      if(randomplay)
+        point = random(1,59);
+      else
+        point = getPointFromDNA(eventc);
       stage.lines[124].r = new Range(movedrange+point-60, movedrange+point+0);
       norbit = stage.getCollidedOrbit(orbit, ball);
       eventc++;
