@@ -9,14 +9,14 @@ void setup() {
   size(1200, 1000);
   frameRate(60);
 
-  //study();
+  study();
   //test();
-  randomTest();
+  //randomTest();
 }
 
 void study() {
   output = createWriter("dna.txt"); 
-  ga = new GA(30, 50, 1, 90);
+  ga = new GA(15, 10, 1, 90, 90);
   ga.exec();
 }
 

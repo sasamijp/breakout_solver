@@ -1,15 +1,16 @@
 
 class GA {
-  int population, generationCount, mutationRate, eliteLength, bitLength;
+  int population, generationCount, mutationRate, eliteLength, bitLength, crossOverRate;
   
   Gene[] genes;
   Simulation[] sims;
 
-  GA(int _population, int _mutationRate, int _eliteLength, int _bitLength){
+  GA(int _population, int _mutationRate, int _eliteLength, int _bitLength, int _crossOverRate){
     population = _population;
     mutationRate = _mutationRate;
     eliteLength = _eliteLength;
     bitLength = _bitLength;
+    crossOverRate = _crossOverRate;
     generationCount = 1;
     genes = new Gene[population];
     for(int i=0; i<population; i++)
@@ -159,9 +160,11 @@ class GA {
     int c = eliteLength;
     String children;
     for(int i=eliteLength;i<((population-eliteLength)/2)+eliteLength;i++){
-      children = breed(genes[i].dna, genes[i+1].dna);
-      genes[c] = new Gene(children.split(",")[0]);
-      genes[c+1] = new Gene(children.split(",")[1]);
+      if(random(100) < crossOverRate){
+        children = breed(genes[i].dna, genes[i+1].dna);
+        genes[c] = new Gene(children.split(",")[0]);
+        genes[c+1] = new Gene(children.split(",")[1]);
+      }
       c += 2;
     }
   }
