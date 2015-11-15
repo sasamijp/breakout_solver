@@ -73,6 +73,35 @@ class GA {
   }
   
   String crossOver(String dna1, String dna2){
+    int samepoint = 0;
+    for(int i=0; i<bitLength/6; i++)
+      if(dna1.substring(i, 6) == dna2.substring(i,6)){
+        samepoint += 1;
+      }else{
+        break;
+      }
+ 
+    String child1 = "", child2 = "";
+    
+    for(int i=0; i<bitLength/6; i++){
+      if(i <= samepoint){
+        for(int k=0; k<6; k++){
+          child1 += dna1.charAt(6*i+k);
+          child2 += dna2.charAt(6*i+k);
+        }
+      }else{
+        for(int k=0; k<6; k++){
+          child1 += dna2.charAt(6*i+k);
+          child2 += dna1.charAt(6*i+k);
+        }
+      }
+
+    }
+    return child1 + "," + child2;
+  
+  }
+  /*
+  String crossOver(String dna1, String dna2){
     
     assert(bitLength % 6 == 0);
     
@@ -91,7 +120,7 @@ class GA {
           child2 += dna1.charAt(6*i+k);
         }
       }
-    
+
     }
     //println(child1.length());
     assert(child1.length() == bitLength && child2.length() == bitLength);
@@ -105,7 +134,7 @@ class GA {
     
     //int crosspos = int(random(1,bitLength-1));
     //return (dna1.substring(0,crosspos) + dna2.substring(crosspos) + "," + dna2.substring(0,crosspos) + dna1.substring(crosspos));
-  }
+  }*/
   
   String genMask(int len){
     String ret = "";
@@ -134,7 +163,7 @@ class GA {
   
   String mutation(String dna){
     int pos = int(random(bitLength-37));
-    int range = int(random(1, 3))*12;
+    int range = 6;
     dna = dna.substring(0,pos) + bitReverse(dna.substring(pos, pos+range)) + dna.substring(pos+range);
     assert(dna.length() == bitLength);
     return dna;

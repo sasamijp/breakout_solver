@@ -16,7 +16,7 @@ void setup() {
 
 void study() {
   output = createWriter("dna.txt"); 
-  ga = new GA(15, 10, 1, 90, 90);
+  ga = new GA(15, 40, 1, 90, 90);
   ga.exec();
 }
 
